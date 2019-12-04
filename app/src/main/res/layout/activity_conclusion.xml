@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ConclusionActivity">
+
+    <android.support.design.widget.TabLayout
+    android:id="@+id/conclusion_tab_layout"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginLeft="75dp"
+    android:layout_marginRight="75dp"
+    app:tabIndicatorColor="#3F51B5"
+    app:tabSelectedTextColor="#3F51B5"
+    app:tabTextColor="#030015">
+
+    </android.support.design.widget.TabLayout>
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/conclusion_frame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:layout_marginBottom="80dp">-->
+    <!--</FrameLayout>-->
+
+    <com.example.snugalpha.Utils.MyViewPager
+    android:id="@+id/conclusion_view_pager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="80dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </com.example.snugalpha.Utils.MyViewPager>
+
+
+</LinearLayout>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <ImageView
+        android:id="@+id/train_back"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backldpi"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:text="当前频率是否合适？"/>
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/fluent1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rd1"
+            android:text="多说些" />
+
+        <RadioButton
+            android:id="@+id/fluent2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rd2"
+            android:text="合适" />
+
+        <RadioButton
+            android:id="@+id/fluent3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="rd3"
+            android:text="太吵了" />
+
+    </RadioGroup>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#717171"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:text="这个时间请不要打扰我！"/>
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/check_starttime"
+            android:text="开始时间段"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/check_endtime"
+            android:text="结束时间段"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#717171"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:text="在这些领域和我说话"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/domain1"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  穿衣" />
+
+        <CheckBox
+            android:id="@+id/domain2"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  饮食" />
+
+        <CheckBox
+            android:id="@+id/domain3"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  娱乐" />
+        <CheckBox
+            android:id="@+id/domain4"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  人情" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <CheckBox
+            android:id="@+id/domain5"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  家务" />
+
+        <CheckBox
+            android:id="@+id/domain6"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  阅读" />
+
+        <CheckBox
+            android:id="@+id/domain7"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  作息" />
+        <CheckBox
+            android:id="@+id/domain8"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/select_style"
+            android:layout_gravity="center"
+            android:button="@null"
+            android:checked="false"
+            android:tag="rd3"
+            android:textSize="17sp"
+            android:text="  其他" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

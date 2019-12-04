@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:paddingTop="15dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/all_trip_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="154dp"
+        app:cardCornerRadius="10dp">
+        <!--TODO:最后一个item与底部的距离-->
+
+        <ImageView
+            android:id="@+id/trip_type_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/trip_type_name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColor="#fff"
+                android:textSize="17sp"
+                android:text="一个美妙的夜晚"/>
+
+            <TextView
+                android:id="@+id/trip_type_name_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="睡得更好" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/missions_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:textColor="#ffff"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:textSize="18sp"
+                android:text="15"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#ffff"
+                android:textSize="18sp"
+                android:text="/"/>
+
+            <TextView
+                android:id="@+id/all_missions_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="20dp"
+                android:textSize="18sp"
+                android:textColor="#ffff"
+                android:text="30"/>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
