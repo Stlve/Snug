@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.example.snugalpha.Api.LoginResponse;
+import com.example.snugalpha.Fragment.Login;
 import com.example.snugalpha.Utils.Card;
 import com.example.snugalpha.Utils.CardAdapter;
 
@@ -24,12 +26,18 @@ public class MainActivity extends AppCompatActivity {
     private List<Card> cardList = new ArrayList<>();
     private CardAdapter adapter;
     private ImageView head_photo;
-    private int id=0;
+    private int id= 0;
+    private  static volatile int count =0;
+//    LoginResponse user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        System.out.println("这里是主函数测试"+LoginResponse.Data.getDatas());
+//        if (LoginResponse.Data.getDatas()!=null){
+//            id = LoginResponse.Data.getDatas().id;
+//        }
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         initCards();
@@ -49,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //得到用户的id
-        Intent intent=getIntent();
-        String s =intent.getStringExtra("id");
+        //id = Integer.parseInt(LoginResponse.Data.getData().id);
+//        Intent intent=getIntent();
+//        String s =intent.getStringExtra("id");
 //        id = Integer.parseInt(s);
 //        id = intent.getStringExtra("id");
         adapter = new CardAdapter(cardList);
@@ -60,22 +69,22 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int Position, List<Card> cardList) {
                 if (Position==0){
                     Intent i = new Intent(MainActivity.this, TrainingActivity.class);
-                    i.putExtra("id",id);
+                   // i.putExtra("id",id);
                     startActivity(i);
                 }
                 if (Position==1){
                     Intent i = new Intent(MainActivity.this, TaskListActivity.class);
-                    i.putExtra("id",id);
+                   // i.putExtra("id",id);
                     startActivity(i);
                 }
                 if (Position==2){
                     Intent i = new Intent(MainActivity.this, AllTripActivity.class);
-                    i.putExtra("id",id);
+                    //i.putExtra("id",id);
                     startActivity(i);
                 }
                 if (Position==3){
                     Intent i = new Intent(MainActivity.this,ConclusionActivity.class);
-                    i.putExtra("id",id);
+                  //  i.putExtra("id",id);
                     startActivity(i);
                 }
             }
@@ -84,10 +93,21 @@ public class MainActivity extends AppCompatActivity {
         head_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //还未登录的时候
+                if (count==0){
+                    Intent i = new Intent(MainActivity.this, LogActivity.class);  // 进去MainActivity
+                    //i.putExtra("id",id);
+                    startActivity(i);
+                    count ++;
+                }
+                else{
+                    id = LoginResponse.Data.getDatas().id;
+                    //System.out.println("进入用户中心"+id);
+                    Intent i = new Intent(MainActivity.this, PersonalActivity.class);  // 进去MainActivity
+                   // i.putExtra("id",id);
+                    startActivity(i);
+                }
 
-                Intent i = new Intent(MainActivity.this, LogActivity.class);  // 进去MainActivity
-                i.putExtra("id",id);
-                startActivity(i);
             }
         });
 

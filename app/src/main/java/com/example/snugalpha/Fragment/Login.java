@@ -22,6 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.snugalpha.Api.LoginResponse.Data.datas;
+
 
 public class Login extends Fragment {
 
@@ -64,6 +66,17 @@ public class Login extends Fragment {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 System.out.println(response.body().msg);
+                String name = response.body().data.name;
+                String telephone = response.body().data.telephone;
+                int id = response.body().data.id;
+                LoginResponse.Data data = new LoginResponse.Data(name,telephone,id);
+                LoginResponse.Data.setDatas(data);
+//                LoginResponse.Data.data.setId(id);//response.body().data
+//                LoginResponse.Data.data.setName(name);
+//                LoginResponse.Data.data.setTelephone(telephone);
+               // System.out.println(LoginResponse.Data.getData().id);
+                System.out.println("这里是测试"+LoginResponse.Data.getDatas());
+
             }
 
             @Override

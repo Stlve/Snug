@@ -105,9 +105,10 @@ public class SignUp extends Fragment {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 System.out.println(response.body().msg);
-                getlogin_id = response.body().data.id;
-                getlogin_name = response.body().data.name;
-                getlogin_telephone = response.body().data.telephone;
+               // LoginResponse.Data.setData(response.body().data);
+//                getlogin_id = response.body().data.id;
+//                getlogin_name = response.body().data.name;
+//                getlogin_telephone = response.body().data.telephone;
             }
 
             @Override

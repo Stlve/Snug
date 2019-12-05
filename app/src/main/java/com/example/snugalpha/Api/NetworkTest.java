@@ -12,7 +12,7 @@ public class NetworkTest {
     public static void main(String[] args) {
         Network.init();
         //register();
-       //login();
+       login();
         //getuserInfo();
        // getalterUserInfo();
         //getviewTask();
@@ -81,6 +81,7 @@ public class NetworkTest {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 System.out.println(response.body().msg);
+                System.out.println(response.body().data.id);
             }
 
             @Override

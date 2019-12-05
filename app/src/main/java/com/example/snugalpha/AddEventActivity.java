@@ -100,7 +100,6 @@ public class AddEventActivity extends AppCompatActivity {
                         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
                        // System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
                         userTask.setStart(df.format(new Date())+time);
-
                         break;
                     default:
                         break;
@@ -141,7 +140,7 @@ public class AddEventActivity extends AppCompatActivity {
             public void onClick(View v) {
                 userTask.setInfo(Event_name.getText().toString());
                 Intent i = new Intent(AddEventActivity.this, MainActivity.class);  // 进去MainActivity
-                i.putExtra("id",id);
+             //   i.putExtra("id",id);
                 startActivity(i);
 
             }

@@ -11,17 +11,27 @@ public class LoginResponse {
     public static class Data{
        public  String name;
         public String telephone;
-        public String id;
-        public Data(String name, String telephone, String id){
+        public  int id;
+        public Data(String name, String telephone, int id){
             this.id=id;
             this.name=name;
             this.telephone=telephone;
         }
+        public static volatile Data datas;
+
+        public static void setDatas(Data datas) {
+            Data.datas = datas;
+        }
+
+        public static Data getDatas() {
+            return datas;
+        }
+
         public void setName(String name) {
             this.name = name;
         }
 
-        public void setId(String id) {
+        public void setId(int id) {
             this.id = id;
         }
 
@@ -33,7 +43,7 @@ public class LoginResponse {
             return name;
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
