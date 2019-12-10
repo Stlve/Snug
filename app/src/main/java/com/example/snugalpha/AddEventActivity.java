@@ -1,7 +1,10 @@
 package com.example.snugalpha;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Network;
 import android.os.Bundle;
@@ -12,8 +15,10 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -23,6 +28,8 @@ import android.widget.Toast;
 
 
 import com.example.snugalpha.Utils.UserTask;
+import com.jzxiang.pickerview.data.Type;
+import com.jzxiang.pickerview.listener.OnDateSetListener;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -35,10 +42,10 @@ import java.util.List;
 public class AddEventActivity extends AppCompatActivity {
 
     private Calendar cal;
-    String time="";
-    private int year,month,day;
-    int minute,hour;
-   private TextView tvShowDialog,tvShowDialog2;
+    String time = "";
+    private int year, month, day;
+    int minute, hour;
+    private TextView tvShowDialog, tvShowDialog2;
     private Button finish;
     private Spinner spinner;
     private List<String> data_list;
@@ -49,6 +56,8 @@ public class AddEventActivity extends AppCompatActivity {
     private static UserTask userTask;
     private int id;
     private EditText Event_name;
+    private TimePickerDialog dialogAll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,13 +82,13 @@ public class AddEventActivity extends AppCompatActivity {
         data_list.add("一天4次");
 
         //适配器
-        arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
+        arr_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
         //设置样式
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
         spinner.setAdapter(arr_adapter);
 
-        tvShowDialog=(TextView) findViewById(R.id.tvShowDialog);
+        tvShowDialog = (TextView) findViewById(R.id.tvShowDialog);
         tvShowDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,78 +96,75 @@ public class AddEventActivity extends AppCompatActivity {
 
                     case R.id.tvShowDialog:
                         Calendar calendar = Calendar.getInstance();
-                        int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
-                        int minute  = calendar.get(Calendar.MINUTE);            //得到分钟
-                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {@Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
+                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
+                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
 
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                                 //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
-                               tvShowDialog.setText(" "+hourOfDay+":"+minute+":00");
-                                time=" "+hourOfDay+":"+minute+":00";
+                                tvShowDialog.setText("" + hourOfDay + ":" + minute);
                             }
                         }, hourOfDay, minute, true).show();
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-                       // System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
-                        userTask.setStart(df.format(new Date())+time);
                         break;
                     default:
                         break;
                 }
             }
         });
-        tvShowDialog2=(TextView) findViewById(R.id.tvShowDialog2);
+        tvShowDialog2 = (TextView) findViewById(R.id.tvShowDialog2);
         tvShowDialog2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tvShowDialog2:
                         Calendar calendar = Calendar.getInstance();
-                        int hourOfDay  = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
-                        int minute  = calendar.get(Calendar.MINUTE);            //得到分钟
+                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
+                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
                         new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
 
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                                 //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
-                               tvShowDialog.setText(" "+hourOfDay+":"+minute+":00");
-                                time=" "+hourOfDay+":"+minute+":00";
+                                tvShowDialog2.setText(" " + hourOfDay + ":" + minute + ":00");
+                                //  time=" "+hourOfDay+":"+minute+":00";
                             }
                         }, hourOfDay, minute, true).show();
-                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-                        userTask.setEnd(df.format(new Date())+time);
+//                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+//                        userTask.setEnd(df.format(new Date())+time);
                         break;
                     default:
                         break;
                 }
             }
         });
-        Event_name =(EditText)findViewById(R.id.event_name);
-        finish = (Button)findViewById(R.id.addclose);
+        Event_name = (EditText) findViewById(R.id.event_name);
+        finish = (Button) findViewById(R.id.addclose);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 userTask.setInfo(Event_name.getText().toString());
                 Intent i = new Intent(AddEventActivity.this, MainActivity.class);  // 进去MainActivity
-             //   i.putExtra("id",id);
+                //   i.putExtra("id",id);
                 startActivity(i);
 
             }
         });
-        aSwitch = (Switch)findViewById(R.id.switcher);
+        aSwitch = (Switch) findViewById(R.id.switcher);
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
+                if (isChecked) {
                     aSwitch.setChecked(true);
 
-                }else {
+                } else {
 
                     aSwitch.setChecked(false);
                 }
             }
         });
-        ImageView addclose = (ImageView)findViewById(R.id.add_close);
+        ImageView addclose = (ImageView) findViewById(R.id.add_close);
         addclose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,7 +174,7 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-    }
+
 //    public void addTask(){
 //        Network.api.addTask(userTask).enqueue(new Callback<addTaskResponse>() {
 //            @Override
@@ -184,29 +190,31 @@ public class AddEventActivity extends AppCompatActivity {
 //
 //            }
 //        });
-//    }
-    private void showStatusBar() {
-        WindowManager.LayoutParams attrs = getWindow().getAttributes();
-        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        getWindow().setAttributes(attrs);
-    }
 
-    //获取手机状态栏高度
-    public static int getStatusBarHeight(Context context) {
-        Class<?> c = null;
-        Object obj = null;
-        Field field = null;
-        int x = 0, statusBarHeight = 0;
-        try {
-            c = Class.forName("com.android.internal.R$dimen");
-            obj = c.newInstance();
-            field = c.getField("status_bar_height");
-            x = Integer.parseInt(field.get(obj).toString());
-            statusBarHeight = context.getResources().getDimensionPixelSize(x);
-        } catch (Exception e1) {
-            e1.printStackTrace();
+    }
+        private void showStatusBar () {
+            WindowManager.LayoutParams attrs = getWindow().getAttributes();
+            attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+            getWindow().setAttributes(attrs);
         }
-        return statusBarHeight;
+
+        //获取手机状态栏高度
+        public static int getStatusBarHeight (Context context){
+            Class<?> c = null;
+            Object obj = null;
+            Field field = null;
+            int x = 0, statusBarHeight = 0;
+            try {
+                c = Class.forName("com.android.internal.R$dimen");
+                obj = c.newInstance();
+                field = c.getField("status_bar_height");
+                x = Integer.parseInt(field.get(obj).toString());
+                statusBarHeight = context.getResources().getDimensionPixelSize(x);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            return statusBarHeight;
+        }
+
     }
 
-}
