@@ -6,12 +6,12 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Network;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -27,6 +27,9 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
+import com.example.snugalpha.Api.LoginResponse;
+import com.example.snugalpha.Api.Network;
+import com.example.snugalpha.Api.RegisterResponse;
 import com.example.snugalpha.Utils.UserTask;
 import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
@@ -37,6 +40,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AddEventActivity extends AppCompatActivity {
@@ -53,10 +60,12 @@ public class AddEventActivity extends AppCompatActivity {
     private Switch aSwitch;
     private TimePicker timePicker;
     private RelativeLayout relativeLayout;
-    private static UserTask userTask;
+    private static UserTask userTask=null;
     private int id;
     private EditText Event_name;
     private TimePickerDialog dialogAll;
+    private boolean pinlu = true;
+    private String count = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +96,23 @@ public class AddEventActivity extends AppCompatActivity {
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //加载适配器
         spinner.setAdapter(arr_adapter);
+        //添加Spinner事件监听
+     spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+
+        @Override
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            count = data_list.get(arg2);
+            //设置显示当前选择的项
+            arg0.setVisibility(View.VISIBLE);
+         }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            // TODO Auto-generated method stub
+        }
+
+    });
+
 
         tvShowDialog = (TextView) findViewById(R.id.tvShowDialog);
         tvShowDialog.setOnClickListener(new View.OnClickListener() {
@@ -140,13 +166,19 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
         Event_name = (EditText) findViewById(R.id.event_name);
+        //完成按钮的点击事件
         finish = (Button) findViewById(R.id.addclose);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                userTask = new UserTask("","","",LoginResponse.Data.datas.id);
                 userTask.setInfo(Event_name.getText().toString());
+                userTask.setStart(tvShowDialog.getText().toString());
+                userTask.setEnd(tvShowDialog2.getText().toString());
+                userTask.setUserId(LoginResponse.Data.datas.id);
+                //频率
+                //是否评级
                 Intent i = new Intent(AddEventActivity.this, MainActivity.class);  // 进去MainActivity
-                //   i.putExtra("id",id);
                 startActivity(i);
 
             }
@@ -157,9 +189,10 @@ public class AddEventActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     aSwitch.setChecked(true);
+                    pinlu = true;
 
                 } else {
-
+                    pinlu = false;
                     aSwitch.setChecked(false);
                 }
             }
@@ -174,22 +207,6 @@ public class AddEventActivity extends AppCompatActivity {
             }
         });
 
-
-//    public void addTask(){
-//        Network.api.addTask(userTask).enqueue(new Callback<addTaskResponse>() {
-//            @Override
-//            public void onResponse(Call<addTaskResponse> call, Response<addTaskResponse> response) {
-//                //返回msg
-//                if(response.body().msg=="ok"){
-//                    Toast.makeText(AddEventActivity.this,"添加成功",Toast.LENGTH_LONG).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<addTaskResponse> call, Throwable t) {
-//
-//            }
-//        });
 
     }
         private void showStatusBar () {
@@ -215,6 +232,19 @@ public class AddEventActivity extends AppCompatActivity {
             }
             return statusBarHeight;
         }
+    private static void getaddTask(){
+        Network.api.getaddTask(new com.example.snugalpha.Api.UserTask("记得跑步","2019-02-26 23:10:00","2019-12-1 23:30:00",5)).enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                System.out.println(response.body().msg);
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+
+            }
+        });
+    }
 
     }
 

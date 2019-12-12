@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -127,6 +128,20 @@ public class TrainingActivity extends AppCompatActivity {
                 // tvShow.setText(sb);//显示
             }
         });
+
+        btnQueDing = (Button)findViewById(R.id.end);
+        btnQueDing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast toast=Toast.makeText(getApplicationContext(), "更新完成", Toast.LENGTH_SHORT);
+                //显示toast信息
+                toast.show();
+                Intent i = new Intent(TrainingActivity.this, MainActivity.class);  // 进去MainActivity
+                startActivity(i);
+            }
+        });
+
     }
     private void showStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();

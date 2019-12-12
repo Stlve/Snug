@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.snugalpha.Api.LoginResponse;
@@ -108,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                 }
 
+            }
+        });
+        Button train = (Button)findViewById(R.id.train);
+        train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, TrainingActivity.class);  // 进去MainActivity
+                //i.putExtra("id",id);
+                startActivity(i);
             }
         });
 

@@ -1,7 +1,7 @@
 package com.example.snugalpha.Api;
 
 public class RegisterResponse {
-    String msg;
+    public String msg;
 
     public RegisterResponse(String msg){
         this.msg=msg;

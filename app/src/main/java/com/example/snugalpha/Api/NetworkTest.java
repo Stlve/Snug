@@ -16,7 +16,7 @@ public class NetworkTest {
         //getuserInfo();
        // getalterUserInfo();
         //getviewTask();
-       // getaddTask();
+        getaddTask();
         //getalterTask();
         //getviewSysTask();
       // getTaskfeedback();

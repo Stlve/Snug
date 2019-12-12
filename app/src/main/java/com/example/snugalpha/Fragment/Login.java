@@ -42,14 +42,14 @@ public class Login extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_login, container, false);
         mContext = view.getContext();
-        name = view.findViewById(R.id.login_telephone);
+      //  name = view.findViewById(R.id.login_telephone);
         telephone = view.findViewById(R.id.login_telephone);
         password = view.findViewById(R.id.input_edit);
         btn_login = view.findViewById(R.id.button_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login_name = name.getText().toString();
+               // login_name = name.getText().toString();
                 login_password = password.getText().toString();
                 login_telephone = telephone.getText().toString();
                     login();

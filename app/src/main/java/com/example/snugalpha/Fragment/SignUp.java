@@ -56,7 +56,7 @@ public class SignUp extends Fragment {
                 editText1 = view.findViewById(R.id.input_edit);   // 密码
                 editText2 = view.findViewById(R.id.match_edit);     //确认密码
                 user_name =view.findViewById(R.id.edit_text);    //
-                phone=view.findViewById(R.id.phone);  //获得昵称
+                phone=view.findViewById(R.id.phone);  //获得电话号码
                 if(user_name==null){
                     Toast.makeText(mContext,"用户名不能为空", Toast.LENGTH_LONG).show();
                 }
@@ -71,9 +71,14 @@ public class SignUp extends Fragment {
                 }
                 else {
                     registername = user_name.getText().toString();
-                    registerpassword= editText1.getText().toString();
+                    registerpassword = editText1.getText().toString();
                     registerphone = phone.getText().toString();
                     register();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     login();
                     Intent i = new Intent(mContext, MainActivity.class);
                     //  i.putExtra("id", get_login_id);
@@ -89,7 +94,7 @@ public class SignUp extends Fragment {
         Network.api.register(new UserDto(registername,registerphone,registerpassword)).enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
-                System.out.println(response.body().getMsg());
+                System.out.println("注册："+response.body().msg);
                 //  Log.d("msg",response.body().msg);
             }
 
@@ -104,11 +109,14 @@ public class SignUp extends Fragment {
         Network.api.login(new LoginUser(registerphone,registerpassword)).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                System.out.println(response.body().msg);
-               // LoginResponse.Data.setData(response.body().data);
-//                getlogin_id = response.body().data.id;
-//                getlogin_name = response.body().data.name;
-//                getlogin_telephone = response.body().data.telephone;
+                System.out.println("登录："+response.body().msg);
+               // System.out.println(response.body().msg);
+                String name = response.body().data.name;
+                String telephone = response.body().data.telephone;
+                int id = response.body().data.id;
+                LoginResponse.Data data = new LoginResponse.Data(name,telephone,id);
+                LoginResponse.Data.setDatas(data);
+                System.out.println("这里是测试"+LoginResponse.Data.getDatas());
             }
 
             @Override

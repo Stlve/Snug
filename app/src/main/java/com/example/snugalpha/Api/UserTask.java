@@ -5,7 +5,7 @@ public class UserTask {
     String start;
     String end;
     int userId;
-    UserTask(String Info, String Start, String End, int UserId){
+   public UserTask(String Info, String Start, String End, int UserId){
         info=Info;
         start=Start;
         end=End;
