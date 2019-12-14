@@ -1,5 +1,6 @@
 package com.example.snugalpha;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -35,11 +36,13 @@ import com.jzxiang.pickerview.data.Type;
 import com.jzxiang.pickerview.listener.OnDateSetListener;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,12 +50,12 @@ import retrofit2.Response;
 
 
 public class AddEventActivity extends AppCompatActivity {
-
+//implements View.OnClickListener
     private Calendar cal;
     String time = "";
     private int year, month, day;
     int minute, hour;
-    private TextView tvShowDialog, tvShowDialog2;
+    private TextView tvShowDialog, tvShowDialog2,data1,data2;
     private Button finish;
     private Spinner spinner;
     private List<String> data_list;
@@ -66,6 +69,9 @@ public class AddEventActivity extends AppCompatActivity {
     private TimePickerDialog dialogAll;
     private boolean pinlu = true;
     private String count = "";
+
+    DateFormat format= DateFormat.getDateTimeInstance();
+    Calendar calendar = Calendar.getInstance(Locale.CHINA);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,17 +127,18 @@ public class AddEventActivity extends AppCompatActivity {
                 switch (v.getId()) {
 
                     case R.id.tvShowDialog:
-                        Calendar calendar = Calendar.getInstance();
-                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
-                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
-                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
-                                tvShowDialog.setText("" + hourOfDay + ":" + minute);
-                            }
-                        }, hourOfDay, minute, true).show();
+                        showTimePickerDialog(AddEventActivity.this,  4, tvShowDialog, calendar);
+//
+//                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
+//                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
+//                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//
+//                            @Override
+//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                                //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
+//                                tvShowDialog.setText("" + hourOfDay + ":" + minute);
+//                            }
+//                        }, hourOfDay, minute, true).show();
                         break;
                     default:
                         break;
@@ -144,25 +151,41 @@ public class AddEventActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tvShowDialog2:
-                        Calendar calendar = Calendar.getInstance();
-                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
-                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
-                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                                //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
-                                tvShowDialog2.setText(" " + hourOfDay + ":" + minute + ":00");
-                                //  time=" "+hourOfDay+":"+minute+":00";
-                            }
-                        }, hourOfDay, minute, true).show();
+                        showTimePickerDialog(AddEventActivity.this,  4, tvShowDialog2, calendar);
+//                        Calendar calendar = Calendar.getInstance();
+//                        int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);    //得到小时
+//                        int minute = calendar.get(Calendar.MINUTE);            //得到分钟
+//                        new TimePickerDialog(AddEventActivity.this, new TimePickerDialog.OnTimeSetListener() {
+//
+//                            @Override
+//                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//
+//                                //  这个方法是得到选择后的 小时、分钟，分别对应着三个参数 —   hourOfDay、minute
+//                                tvShowDialog2.setText(" " + hourOfDay + ":" + minute );
+//                                //  time=" "+hourOfDay+":"+minute+":00";
+//                            }
+//                        }, hourOfDay, minute, true).show();
 //                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
 //                        userTask.setEnd(df.format(new Date())+time);
                         break;
                     default:
                         break;
                 }
+            }
+        });
+        data1 = (TextView)findViewById(R.id.data1);
+        data1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showDatePickerDialog(AddEventActivity.this,  0, data1, calendar);
+            }
+        });
+        data2 = (TextView)findViewById(R.id.data2);
+        data2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDatePickerDialog(AddEventActivity.this,  0, data2, calendar);
             }
         });
         Event_name = (EditText) findViewById(R.id.event_name);
@@ -172,6 +195,10 @@ public class AddEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userTask = new UserTask("","","",LoginResponse.Data.datas.id);
+                String start_time,end_time;
+                start_time = data2.getText().toString()+tvShowDialog.getText().toString();
+                end_time = data1.getText().toString()+tvShowDialog2.getText().toString();
+                System.out.println(start_time+" "+end_time);
                 userTask.setInfo(Event_name.getText().toString());
                 userTask.setStart(tvShowDialog.getText().toString());
                 userTask.setEnd(tvShowDialog2.getText().toString());
@@ -244,6 +271,53 @@ public class AddEventActivity extends AppCompatActivity {
 
             }
         });
+    }
+    /**
+     * 日期选择
+     * @param activity
+     * @param themeResId
+     * @param tv
+     * @param calendar
+     */
+    public static void showDatePickerDialog(Activity activity, int themeResId, final TextView tv, Calendar calendar) {
+        // 直接创建一个DatePickerDialog对话框实例，并将它显示出来
+        new DatePickerDialog(activity, themeResId, new DatePickerDialog.OnDateSetListener() {
+            // 绑定监听器(How the parent is notified that the date is set.)
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // 此处得到选择的时间，可以进行你想要的操作
+                tv.setText(" " + year + "年" + (monthOfYear + 1) + "月" + dayOfMonth + "日");
+            }
+        }
+                // 设置初始日期
+                , calendar.get(Calendar.YEAR)
+                , calendar.get(Calendar.MONTH)
+                , calendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+    /**
+     * 时间选择
+     * @param activity
+     * @param themeResId
+     * @param tv
+     * @param calendar
+     */
+    public static void showTimePickerDialog(Activity activity,int themeResId, final TextView tv, Calendar calendar) {
+        // Calendar c = Calendar.getInstance();
+        // 创建一个TimePickerDialog实例，并把它显示出来
+        // 解释一哈，Activity是context的子类
+        new TimePickerDialog( activity,themeResId,
+                // 绑定监听器
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        tv.setText(" " + hourOfDay + "时" + minute  + "分");
+                    }
+                }
+                // 设置初始时间
+                , calendar.get(Calendar.HOUR_OF_DAY)
+                , calendar.get(Calendar.MINUTE)
+                // true表示采用24小时制
+                ,true).show();
     }
 
     }

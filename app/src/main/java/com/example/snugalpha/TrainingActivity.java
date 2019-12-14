@@ -109,7 +109,8 @@ public class TrainingActivity extends AppCompatActivity {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
+//通过radioGroup.getCheckedRadioButtonId()来得到选中的RadioButton的ID，从而得到RadioButton进而获取选中值
+                selectRadioButton();
             }
         });
 
@@ -134,6 +135,10 @@ public class TrainingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
+                //开始和结束时间
+                start_time.getText();
+                finish_time.getText();
                 Toast toast=Toast.makeText(getApplicationContext(), "更新完成", Toast.LENGTH_SHORT);
                 //显示toast信息
                 toast.show();
@@ -142,6 +147,11 @@ public class TrainingActivity extends AppCompatActivity {
             }
         });
 
+    }
+    //通过radioGroup.getCheckedRadioButtonId()来得到选中的RadioButton的ID，从而得到RadioButton进而获取选中值
+    private void selectRadioButton(){
+        RadioButton rb = (RadioButton)TrainingActivity.this.findViewById(radioGroup.getCheckedRadioButtonId());
+        String s=rb.getText().toString();
     }
     private void showStatusBar() {
         WindowManager.LayoutParams attrs = getWindow().getAttributes();
@@ -209,3 +219,15 @@ public class TrainingActivity extends AppCompatActivity {
         return tag;
     }
 }
+//    StringBuffer sb = new StringBuffer();
+////获取多选的焊口号
+//        for (CheckBox checkBox : checkBoxList) {
+//                if (checkBox.isChecked()) {
+//                System.out.println(checkBox.getText().toString());
+//                sb.append(checkBox.getText().toString());
+//                }
+//                }
+//                //判断是否选择了焊口号
+//                if (sb != null && sb.toString().equals("")) {
+//                System.out.println("请至少选择一个checkbox");
+//                }

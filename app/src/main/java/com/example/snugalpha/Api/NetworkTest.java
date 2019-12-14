@@ -12,14 +12,28 @@ public class NetworkTest {
     public static void main(String[] args) {
         Network.init();
         //register();
-       login();
-        //getuserInfo();
+      // login();
+       // getuserInfo();
        // getalterUserInfo();
-        //getviewTask();
-        getaddTask();
+       // getviewTask();
+        //getaddTask();
         //getalterTask();
         //getviewSysTask();
       // getTaskfeedback();
+        getviewData();
+    }
+    private static  void getviewData(){
+        Network.api.getviewData(new userInfo(44)).enqueue(new Callback<viewDataResponse>() {
+            @Override
+            public void onResponse(Call<viewDataResponse> call, Response<viewDataResponse> response) {
+                System.out.println(response.body().msg);
+            }
+
+            @Override
+            public void onFailure(Call<viewDataResponse> call, Throwable t) {
+
+            }
+        });
     }
     private static void getTaskfeedback() {
         Network.api.getTaskFeedback(new TaskFeedbackUser(1,40,1,"1")).enqueue(new Callback<RegisterResponse>() {
@@ -81,7 +95,7 @@ public class NetworkTest {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 System.out.println(response.body().msg);
-                System.out.println(response.body().data.id);
+               // System.out.println(response.body().data.id);
             }
 
             @Override
@@ -91,7 +105,7 @@ public class NetworkTest {
         });
    }
     private static void getviewTask(){
-        Network.api.getviewTask(new viewTask(5,"2019-02-26 23:10:00")).enqueue(new Callback<viewTaskResponse>() {
+        Network.api.getviewTask(new viewTask(1,"2019-02-26 23:10:00")).enqueue(new Callback<viewTaskResponse>() {
             @Override
             public void onResponse(Call<viewTaskResponse> call, Response<viewTaskResponse> response) {
                 System.out.println(response.body().msg);
@@ -102,6 +116,17 @@ public class NetworkTest {
 
             }
         });
+//        Network.api.getviewTask(new viewTask(1,"2019-02-26 23:10:00")).enqueue(new Callback<viewTaskResponse>() {
+//            @Override
+//            public void onResponse(Call<viewTaskResponse> call, Response<viewTaskResponse> response) {
+//                System.out.println(response.body().msg);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<viewTaskResponse> call, Throwable t) {
+//
+//            }
+//        });
     }
     private static void getalterUserInfo(){
         Network.api.getalterUserInfo(new alterUserInfo(1,"我kaixin","aaa","sss","321")).enqueue(
@@ -119,10 +144,18 @@ public class NetworkTest {
         );
     }
     private static void getuserInfo(){
-        Network.api.getuserInfo(new userInfo(1)).enqueue(new Callback<UserInfoResponse>() {
+        Network.api.getuserInfo(new userInfo(44)).enqueue(new Callback<UserInfoResponse>() {
             @Override
             public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
-                System.out.println(response.body().msg);
+
+                try {
+                    System.out.println(response.body().msg);
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
 
             @Override

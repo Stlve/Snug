@@ -1,11 +1,13 @@
 package com.example.snugalpha.Api;
 
 
+import java.util.List;
+
 public class viewTaskResponse {
     public String msg;
-    public Data data;
+    public List<Data> data;
     public int userId;
-    public viewTaskResponse(String msg,Data data,int userId){
+    public viewTaskResponse(String msg,List<Data> data,int userId){
         this.msg=msg;
         this.data = data;
         this.userId = userId;
@@ -19,7 +21,7 @@ public class viewTaskResponse {
         this.msg = msg;
     }
 
-    public void setData(Data data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 
@@ -27,7 +29,7 @@ public class viewTaskResponse {
         return msg;
     }
 
-    public Data getData() {
+    public List<Data> getData() {
         return data;
     }
 
@@ -36,15 +38,15 @@ public class viewTaskResponse {
     }
 
     public static class Data{
-        public String score;
+        public int score;
         public String taskFlag;
         public String start;
         public String end;
         public String taskInfo;
-        public String taskId;
+        public int taskId;
         public String status;
 
-        public Data(String score,String taskFlag,String start,String end,String taskInfo,String taskId,String status){
+        public  Data(int score,String taskFlag,String start,String end,String taskInfo,int taskId,String status){
             this.score = score;
             this.taskFlag = taskFlag;
             this.start = start;
@@ -54,7 +56,7 @@ public class viewTaskResponse {
             this.status = status;
         }
 
-        public void setScore(String score) {
+        public void setScore(int score) {
             this.score = score;
         }
 
@@ -74,7 +76,8 @@ public class viewTaskResponse {
             this.status = status;
         }
 
-        public void setTaskId(String taskId) {
+
+        public  void setTaskId(int taskId) {
             this.taskId = taskId;
         }
 
@@ -90,7 +93,7 @@ public class viewTaskResponse {
             return status;
         }
 
-        public String getScore() {
+        public int getScore() {
             return score;
         }
 
@@ -102,7 +105,7 @@ public class viewTaskResponse {
             return taskFlag;
         }
 
-        public String getTaskId() {
+        public int getTaskId() {
             return taskId;
         }
 

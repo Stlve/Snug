@@ -1,166 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    android:id="@+id/content_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/content_layout"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:background="@color/colorToolbar"
-        android:layout_height="280dp"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorToolbar"
+            android:layout_height="280dp"
+            android:orientation="vertical"
+            android:paddingTop="55dp">
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:src="@drawable/ic_back"
+                android:background="#00FF0000"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+
+
+                <LinearLayout
+                    android:id="@+id/trans_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="20dp">
+
+                    <TextView
+                        android:id="@+id/person_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="ruanjunxi"
+                        android:textColor="@android:color/white"
+                        android:textSize="34sp"/>
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="yigekeaidehanhanhhhhhhh"-->
+<!--                        android:textColor="@color/gray"-->
+<!--                        android:textSize="15sp"/>-->
+                    <!--                <android.support.v7.widget.AppCompatButton-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="30dp"-->
+                    <!--                    android:layout_marginTop="20dp"-->
+                    <!--                    android:background="@drawable/strokes"-->
+                    <!--                    android:text="hello animation"-->
+                    <!--                    android:textColor="@android:color/white"/>-->
+                </LinearLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/account_img_usertitle"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/touxiang"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/alpha_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="55dp">
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="15dp"
-            android:src="@drawable/ic_back"
-            android:background="#00FF0000"/>
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-
-
-            <LinearLayout
-                android:id="@+id/trans_layout"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            >
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingBottom="20dp"
-                android:paddingLeft="25dp"
-                android:paddingRight="20dp">
+                android:text="Days"
+                android:textColor="#4c5054"
+                android:layout_marginRight="82dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="8dp"
+                android:textSize="23sp"
+                android:layout_gravity="left"
+                />
+            <TextView
+                android:id="@+id/days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="213"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginRight="96dp"
+                android:textColor="#4c5054"
+                android:textSize="23sp"
+                />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ruanjunxi"
-                    android:textColor="@android:color/white"
-                    android:textSize="34sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#f1f1f2"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="yigekeaidehanhanhhhhhhh"
-                    android:textColor="@color/gray"
-                    android:textSize="15sp"/>
-                <!--                <android.support.v7.widget.AppCompatButton-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="30dp"-->
-                <!--                    android:layout_marginTop="20dp"-->
-                <!--                    android:background="@drawable/strokes"-->
-                <!--                    android:text="hello animation"-->
-                <!--                    android:textColor="@android:color/white"/>-->
-            </LinearLayout>
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/account_img_usertitle"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/touxiang"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Finished"
+                android:textColor="#4c5054"
+                android:layout_marginRight="48dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="8dp"
+                android:textSize="23sp"
+                android:layout_gravity="left"
+                />
+            <TextView
+                android:id="@+id/finished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="396"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginRight="96dp"
+                android:textColor="#4c5054"
+                android:textSize="23sp"
                 />
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#f1f1f2"/>
         <LinearLayout
-            android:id="@+id/alpha_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+
             >
 
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="213"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:layout_marginTop="15dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Days"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:paddingBottom="10dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
+                android:text="Perfect"
+                android:textColor="#4c5054"
+                android:layout_marginRight="58dp"
+                android:layout_marginLeft="48dp"
+                android:layout_marginTop="8dp"
+                android:textSize="23sp"
+                android:layout_gravity="left"
+                />
+            <TextView
+                android:id="@+id/perfect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
+                android:text="145"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_marginRight="96dp"
+                android:textColor="#4c5054"
+                android:textSize="23sp"
+                />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="396"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:layout_marginTop="15dp"
-                    />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Finished"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:paddingBottom="10dp"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="145"
-                    android:textColor="@color/white"
-                    android:textSize="23sp"
-                    android:layout_marginTop="15dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Perfect"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:paddingBottom="10dp"
-                    />
-            </LinearLayout>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#f1f1f2"/>
     </LinearLayout>
-</FrameLayout>
+
+</LinearLayout>
+

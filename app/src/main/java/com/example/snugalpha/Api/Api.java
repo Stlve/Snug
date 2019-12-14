@@ -32,4 +32,7 @@ public interface Api {
 
     @POST("taskFeedback")
     Call<RegisterResponse> getTaskFeedback(@Body TaskFeedbackUser taskFeedbackUser);
+
+    @POST("viewData")
+    Call<viewDataResponse> getviewData(@Body userInfo userInfo);
 }

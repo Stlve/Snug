@@ -9,17 +9,23 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.snugalpha.Api.LoginResponse;
-import com.example.snugalpha.Fragment.Login;
+import com.example.snugalpha.Api.Network;
+import com.example.snugalpha.Api.UserInfoResponse;
+import com.example.snugalpha.Api.userInfo;
+import com.example.snugalpha.Person.PersonalActivity;
 import com.example.snugalpha.Utils.Card;
 import com.example.snugalpha.Utils.CardAdapter;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private ImageView head_photo;
     private int id= 0;
     private  static volatile int count =0;
+    int days;
+     int taskNum;
+    int taskFinishNum;
 //    LoginResponse user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,19 +114,16 @@ public class MainActivity extends AppCompatActivity {
                     id = LoginResponse.Data.getDatas().id;
                     //System.out.println("进入用户中心"+id);
                     Intent i = new Intent(MainActivity.this, PersonalActivity.class);  // 进去MainActivity
-                   // i.putExtra("id",id);
+                    //                     int days;
+//                     int taskNum;
+//                     int taskFinishNum;
+                    i.putExtra("days",days);
+                    i.putExtra("taskNum",taskNum);
+                    i.putExtra("taskFinishNum",taskFinishNum);
+                    getuserInfo();
                     startActivity(i);
                 }
 
-            }
-        });
-        Button train = (Button)findViewById(R.id.train);
-        train.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, TrainingActivity.class);  // 进去MainActivity
-                //i.putExtra("id",id);
-                startActivity(i);
             }
         });
 
@@ -153,5 +159,30 @@ public class MainActivity extends AppCompatActivity {
         return statusBarHeight;
     }
 
+    private  void getuserInfo(){
+        Network.api.getuserInfo(new userInfo(LoginResponse.Data.datas.id)).enqueue(new Callback<UserInfoResponse>() {
+            @Override
+            public void onResponse(Call<UserInfoResponse> call, Response<UserInfoResponse> response) {
 
+                try {
+                    System.out.println(response.body().msg);
+//                     int days;
+//                     int taskNum;
+//                     int taskFinishNum;
+                    days = response.body().data.days;
+                    taskNum = response.body().data.taskNum;
+                    taskFinishNum = response.body().data.taskFinishNum;
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserInfoResponse> call, Throwable t) {
+
+            }
+        });
+    }
 }

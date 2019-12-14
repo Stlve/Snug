@@ -28,12 +28,43 @@ public class UserInfoResponse {
         public String name;
         public String telephone;
         public   int id;
+        public int days;
+        public int taskNum;
+        public int taskFinishNum;
 
-        public Data(String name,String telephone,int id){
+        public Data(int taskFinishNum,String name,int days,String telephone,int id,int taskNum){
             this.name = name;
             this.id=id;
             this.telephone = telephone;
+            this.taskFinishNum = taskFinishNum;
+            this.days = days;
+            this.taskNum=taskNum;
         }
+
+        public int getDays() {
+            return days;
+        }
+
+        public int getTaskFinishNum() {
+            return taskFinishNum;
+        }
+
+        public int getTaskNum() {
+            return taskNum;
+        }
+
+        public void setDays(int days) {
+            this.days = days;
+        }
+
+        public void setTaskFinishNum(int taskFinishNum) {
+            this.taskFinishNum = taskFinishNum;
+        }
+
+        public void setTaskNum(int taskNum) {
+            this.taskNum = taskNum;
+        }
+
         public void setTelephone(String telephone) {
             this.telephone = telephone;
         }
